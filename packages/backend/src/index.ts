@@ -5,10 +5,10 @@ import { once } from 'node:events';
 import { registerRouters } from './shared/config/routers.config';
 import { prisma } from './shared/lib/prisma';
 
+dotenv.config();
+
 (async () => {
   try {
-    dotenv.config();
-
     await prisma.$connect();
 
     const app = express();

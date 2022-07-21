@@ -1,7 +1,9 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import session from 'express-session';
 import { once } from 'node:events';
 
+import { SESSION_COOKIE_NAME } from './shared/config/constants.config';
 import { registerRouters } from './shared/config/routers.config';
 import { prisma } from './shared/lib/prisma';
 import { errorHandler } from './shared/middlewares/error-handler.middleware';
@@ -16,6 +18,14 @@ dotenv.config();
     const port = process.env.PORT || 3000;
 
     app.use(express.json());
+    app.use(
+      session({
+        name: SESSION_COOKIE_NAME,
+        secret: process.env.SESSION_SECRET || '',
+        resave: false,
+        saveUninitialized: false,
+      })
+    );
 
     registerRouters(app);
 

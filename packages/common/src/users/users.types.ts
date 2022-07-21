@@ -13,3 +13,5 @@ export interface CreateUserRequest {
   password: string;
 }
 export type CreateUserResponse = UserDto;
+
+export type GetAuthenticatedUserResponse = UserDto;

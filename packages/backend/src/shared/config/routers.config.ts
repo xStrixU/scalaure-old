@@ -1,10 +1,12 @@
 import { Router } from 'express';
 
+import usersRouter from '../../users/users.router';
+
 import type { Application } from 'express';
 
 import type { AppRouter } from '../types';
 
-const routers: AppRouter[] = [];
+const routers: AppRouter[] = [usersRouter];
 
 export const registerRouters = (app: Application) => {
   const rootRouter = Router();

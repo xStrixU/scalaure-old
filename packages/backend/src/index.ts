@@ -4,6 +4,7 @@ import { once } from 'node:events';
 
 import { registerRouters } from './shared/config/routers.config';
 import { prisma } from './shared/lib/prisma';
+import { errorHandler } from './shared/middlewares/error-handler.middleware';
 
 dotenv.config();
 
@@ -14,7 +15,11 @@ dotenv.config();
     const app = express();
     const port = process.env.PORT || 3000;
 
+    app.use(express.json());
+
     registerRouters(app);
+
+    app.use(errorHandler);
 
     await once(
       app.listen(port, () => {

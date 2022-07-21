@@ -3,10 +3,13 @@ import express from 'express';
 import { once } from 'node:events';
 
 import { registerRouters } from './shared/config/routers.config';
+import { prisma } from './shared/lib/prisma';
 
 (async () => {
   try {
     dotenv.config();
+
+    await prisma.$connect();
 
     const app = express();
     const port = process.env.PORT || 3000;
@@ -22,6 +25,7 @@ import { registerRouters } from './shared/config/routers.config';
   } catch (err) {
     console.log(`Error while bootstrapping application: ${err}`);
 
+    prisma.$disconnect();
     process.exit(1);
   }
 })();

@@ -1,3 +1,4 @@
+import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import session from 'express-session';
@@ -17,7 +18,12 @@ dotenv.config();
     const app = express();
     const port = process.env.PORT || 3000;
 
-    app.use(express.json());
+    app.use(
+      cors({
+        origin: process.env.CORS_ORIGIN,
+        credentials: true,
+      })
+    );
     app.use(
       session({
         name: SESSION_COOKIE_NAME,
@@ -26,6 +32,7 @@ dotenv.config();
         saveUninitialized: false,
       })
     );
+    app.use(express.json());
 
     registerRouters(app);
 

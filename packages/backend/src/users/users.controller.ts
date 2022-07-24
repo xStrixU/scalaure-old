@@ -8,11 +8,7 @@ import { HttpError } from '../shared/errors/http/http.error';
 import { InternalServerError } from '../shared/errors/http/internal-server.error';
 import { prisma } from '../shared/lib/prisma';
 
-import type {
-  CreateUserRequest,
-  CreateUserResponse,
-  GetAuthenticatedUserResponse,
-} from '@scalaure/common';
+import type { CreateUserRequest, CreateUserResponse } from '@scalaure/common';
 
 import type { Handler } from '../shared/types';
 
@@ -54,11 +50,4 @@ export const createUser: Handler<
 
     next(error);
   }
-};
-
-export const getAuthenticatedUser: Handler<
-  never,
-  GetAuthenticatedUserResponse
-> = (req, res) => {
-  res.json(createUserDto(req.authData.user));
 };

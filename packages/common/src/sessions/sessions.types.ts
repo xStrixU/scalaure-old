@@ -7,3 +7,5 @@ export interface CreateSessionRequest {
 export type CreateSessionResponse = UserDto;
 
 export type DeleteSessionResponse = never;
+
+export type GetCurrentSessionResponse = UserDto;

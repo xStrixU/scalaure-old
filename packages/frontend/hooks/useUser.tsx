@@ -1,7 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { createSession, deleteSession } from '../services/session.service';
-import { createUser, getAuthenticatedUser } from '../services/user.service';
+import {
+  createSession,
+  deleteSession,
+  getCurrentSession,
+} from '../services/session.service';
+import { createUser } from '../services/user.service';
 
 import type { UserDto } from '@scalaure/common';
 
@@ -13,7 +17,7 @@ export const useUser = () => {
     USER_QUERY_KEY,
     async () => {
       try {
-        return await getAuthenticatedUser();
+        return await getCurrentSession();
       } catch (err) {
         return null;
       }

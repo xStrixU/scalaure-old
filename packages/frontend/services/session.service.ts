@@ -4,6 +4,7 @@ import type {
   CreateSessionRequest,
   CreateSessionResponse,
   DeleteSessionResponse,
+  GetCurrentSessionResponse,
 } from '@scalaure/common';
 
 export const createSession = async (requestData: CreateSessionRequest) => {
@@ -18,6 +19,14 @@ export const createSession = async (requestData: CreateSessionRequest) => {
 export const deleteSession = async () => {
   const { data } = await axiosWrapper.delete<DeleteSessionResponse>(
     '/sessions'
+  );
+
+  return data;
+};
+
+export const getCurrentSession = async () => {
+  const { data } = await axiosWrapper.get<GetCurrentSessionResponse>(
+    '/sessions/me'
   );
 
   return data;

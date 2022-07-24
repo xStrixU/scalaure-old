@@ -11,6 +11,7 @@ import type {
   CreateSessionRequest,
   CreateSessionResponse,
   DeleteSessionResponse,
+  GetCurrentSessionResponse,
 } from '@scalaure/common';
 
 import type { Handler } from '../shared/types';
@@ -50,4 +51,11 @@ export const deleteSession: Handler<never, DeleteSessionResponse> = (
     res.clearCookie(SESSION_COOKIE_NAME);
     res.sendStatus(status.OK);
   });
+};
+
+export const getCurrentSession: Handler<never, GetCurrentSessionResponse> = (
+  req,
+  res
+) => {
+  res.json(createUserDto(req.authData.user));
 };

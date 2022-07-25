@@ -3,17 +3,17 @@ import { useUser } from 'hooks/useUser';
 import type { UserRoleName } from '@prisma/client';
 import type { ReactElement } from 'react';
 
-type ConditionalElementsProps = Readonly<{
+type PrivateElementsProps = Readonly<{
   loggedIn: boolean;
   roles?: UserRoleName[];
   children: ReactElement | ReactElement[];
 }>;
 
-export const ConditionalElements = ({
+export const PrivateElements = ({
   loggedIn,
   roles = [],
   children,
-}: ConditionalElementsProps) => {
+}: PrivateElementsProps) => {
   const { user } = useUser();
 
   return loggedIn === !!user ||

@@ -5,19 +5,19 @@ import { useUser } from 'hooks/useUser';
 import type { UserRoleName } from '@prisma/client';
 import type { ReactElement } from 'react';
 
-type ConditionalRouteProps = Readonly<{
+type PrivateRouteProps = Readonly<{
   loggedIn: boolean;
   roles?: UserRoleName[];
   redirectPath: string;
   children: ReactElement | ReactElement[];
 }>;
 
-export const ConditionalRoute = ({
+export const PrivateRoute = ({
   loggedIn,
   roles = [],
   redirectPath,
   children,
-}: ConditionalRouteProps) => {
+}: PrivateRouteProps) => {
   const router = useRouter();
   const { user } = useUser();
 

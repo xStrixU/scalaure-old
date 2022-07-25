@@ -4,7 +4,7 @@ import { FiSearch } from 'react-icons/fi';
 import { RiShoppingCart2Line } from 'react-icons/ri';
 
 import { HeaderAvatar } from './HeaderAvatar';
-import { ConditionalElements } from '../Conditionals/ConditionalElements';
+import { PrivateElements } from '../Private/PrivateElements';
 
 import { INDEX_PATH, SIGN_IN_PATH, SIGN_UP_PATH } from 'lib/paths';
 
@@ -32,17 +32,17 @@ export const Header = () => {
             <RiShoppingCart2Line size={26} />
           </div>
         </Link>
-        <ConditionalElements loggedIn>
+        <PrivateElements loggedIn>
           <HeaderAvatar />
-        </ConditionalElements>
-        <ConditionalElements loggedIn={false}>
+        </PrivateElements>
+        <PrivateElements loggedIn={false}>
           <Link href={SIGN_IN_PATH}>
             <a className="btn btn-outline">Sign In</a>
           </Link>
           <Link href={SIGN_UP_PATH}>
             <a className="btn btn-active">Sign Up</a>
           </Link>
-        </ConditionalElements>
+        </PrivateElements>
       </nav>
     </header>
   );

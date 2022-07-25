@@ -1,21 +1,20 @@
 import { useRouter } from 'next/router';
 
 import { useUser } from 'hooks/useUser';
+import { INDEX_PATH, SIGN_IN_PATH } from 'lib/paths';
 
 import type { UserRoleName } from '@prisma/client';
 import type { ReactElement } from 'react';
 
 type PrivateRouteProps = Readonly<{
-  loggedIn: boolean;
+  loggedIn?: boolean;
   roles?: UserRoleName[];
-  redirectPath: string;
   children: ReactElement | ReactElement[];
 }>;
 
 export const PrivateRoute = ({
-  loggedIn,
+  loggedIn = true,
   roles = [],
-  redirectPath,
   children,
 }: PrivateRouteProps) => {
   const router = useRouter();
@@ -25,7 +24,7 @@ export const PrivateRoute = ({
     loggedIn !== !!user ||
     (user && !roles.every(role => user.roles.includes(role)))
   ) {
-    router.replace(redirectPath);
+    router.replace(loggedIn ? SIGN_IN_PATH : INDEX_PATH);
 
     return null;
   }

@@ -10,7 +10,7 @@ import { INDEX_PATH, SIGN_IN_PATH, SIGN_UP_PATH } from 'lib/paths';
 
 export const Header = () => {
   return (
-    <header>
+    <header className="absolute top-0 left-0 right-0">
       <nav className="navbar bg-base-300 space-x-6">
         <Link href={INDEX_PATH}>
           <a>

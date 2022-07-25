@@ -1,5 +1,5 @@
-const IndexPage = () => {
-  return <span>Index Page</span>;
-};
+import { IndexPageContent } from 'components/IndexPageContent/IndexPageContent';
+
+const IndexPage = () => <IndexPageContent />;
 
 export default IndexPage;

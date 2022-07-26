@@ -5,7 +5,7 @@ import {
   deleteSession,
   getCurrentSession,
 } from '../services/session.service';
-import { createUser } from '../services/user.service';
+import { createUser, updateUserDetails } from '../services/user.service';
 
 import type { UserDto } from '@scalaure/common';
 
@@ -44,5 +44,16 @@ export const useUser = () => {
     },
   });
 
-  return { user, registerMutation, loginMutation, logoutMutation, ...rest };
+  const updateUserDetailsMutation = useMutation(updateUserDetails, {
+    onSuccess: setUser,
+  });
+
+  return {
+    user,
+    registerMutation,
+    loginMutation,
+    logoutMutation,
+    updateUserDetailsMutation,
+    ...rest,
+  };
 };

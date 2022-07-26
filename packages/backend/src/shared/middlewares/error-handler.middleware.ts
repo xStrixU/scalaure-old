@@ -20,7 +20,7 @@ export const errorHandler: ErrorRequestHandler = (
           message: 'Something went wrong',
         };
 
-  if (err instanceof InternalServerError) {
+  if (err instanceof InternalServerError && err.error) {
     console.log(`[ErrorHandler] Internal Server Error: ${err.error}`);
   }
 

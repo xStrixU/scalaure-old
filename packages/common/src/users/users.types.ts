@@ -13,3 +13,9 @@ export interface CreateUserRequest {
   password: string;
 }
 export type CreateUserResponse = UserDto;
+
+export interface UpdateUserDetailsRequest {
+  firstName: string;
+  lastName: string;
+}
+export type UpdateUserDetailsResponse = UserDto;

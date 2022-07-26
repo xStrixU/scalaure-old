@@ -6,10 +6,9 @@ import { InternalServerError } from '../errors/http/internal-server.error';
 
 import type { RequestHandler } from 'express';
 import type { ObjectSchema } from 'yup';
-import type { ObjectShape } from 'yup/lib/object';
 
 export const validate =
-  <T extends ObjectShape>(schema: ObjectSchema<T>): RequestHandler =>
+  <T>(schema: ObjectSchema<T>): RequestHandler =>
   async (req, res, next) => {
     try {
       await schema.validate(req.body, { abortEarly: false });

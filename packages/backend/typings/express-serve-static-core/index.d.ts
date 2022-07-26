@@ -1,10 +1,12 @@
 import 'express-serve-static-core';
 
-import type { User, UserRole, UserRoleName } from '@prisma/client';
+import type { UserRoleName } from '@prisma/client';
+
+import type { AppUser } from '../../src/users/users.types';
 
 declare module 'express-serve-static-core' {
   export interface AuthData {
-    user: User & { roles: UserRole[] };
+    user: AppUser;
     roles: UserRoleName[];
   }
 

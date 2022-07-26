@@ -8,7 +8,12 @@ import { HttpError } from '../shared/errors/http/http.error';
 import { InternalServerError } from '../shared/errors/http/internal-server.error';
 import { prisma } from '../shared/lib/prisma';
 
-import type { CreateUserRequest, CreateUserResponse } from '@scalaure/common';
+import type {
+  CreateUserRequest,
+  CreateUserResponse,
+  UpdateUserDetailsRequest,
+  UpdateUserDetailsResponse,
+} from '@scalaure/common';
 
 import type { Handler } from '../shared/types';
 
@@ -29,15 +34,16 @@ export const createUser: Handler<
 
     const user = await prisma.user.create({
       data: {
-        firstName,
-        lastName,
         email,
         password: hashedPassword,
+        details: {
+          create: { firstName, lastName },
+        },
         roles: {
           create: [{ name: 'USER' }],
         },
       },
-      include: { roles: true },
+      include: { details: true, roles: true },
     });
 
     res.status(status.CREATED).json(createUserDto(user));
@@ -49,5 +55,42 @@ export const createUser: Handler<
         : new InternalServerError(err);
 
     next(error);
+  }
+};
+
+export const updateUserDetails: Handler<
+  UpdateUserDetailsRequest,
+  UpdateUserDetailsResponse
+> = async (req, res, next) => {
+  try {
+    const [firstName] = req.body.firstName.split(' ');
+    const [lastName] = req.body.lastName?.split(' ') || [null];
+
+    const { user } = req.authData;
+
+    const { user: newUser, ...userDetails } = await prisma.userDetails.update({
+      data: {
+        firstName,
+        lastName,
+      },
+      where: {
+        id: user.userDetailsId,
+      },
+      include: {
+        user: {
+          include: {
+            roles: true,
+          },
+        },
+      },
+    });
+
+    if (!newUser) {
+      return next(new InternalServerError());
+    }
+
+    res.json(createUserDto({ details: userDetails, ...newUser }));
+  } catch (err) {
+    next(new InternalServerError(err));
   }
 };

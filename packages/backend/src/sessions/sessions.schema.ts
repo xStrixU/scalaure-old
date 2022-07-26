@@ -1,9 +1,9 @@
 import { object, string } from 'yup';
 
 import type { CreateSessionRequest } from '@scalaure/common';
-import type { SchemaOf } from 'yup';
+import type { ObjectSchema } from 'yup';
 
-export const createSessionSchema: SchemaOf<CreateSessionRequest> = object({
+export const createSessionSchema: ObjectSchema<CreateSessionRequest> = object({
   email: string().required(),
   password: string().required(),
 });

@@ -6,6 +6,7 @@ export const findByEmail = async (email: string) => {
       OR: [{ email }],
     },
     include: {
+      details: true,
       roles: true,
     },
   });

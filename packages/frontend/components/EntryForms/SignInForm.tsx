@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form';
 import { object, string } from 'yup';
 
 import { EntryFormWrapper } from './EntryFormWrapper';
-import { Input } from 'components/Input';
-import { PasswordInput } from 'components/PasswordInput';
+import { Input } from 'components/Inputs/Input';
+import { PasswordInput } from 'components/Inputs/PasswordInput';
 
 import { useUser } from 'hooks/useUser';
 import { isApiError } from 'lib/api-error';
